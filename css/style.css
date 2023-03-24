@@ -1,65 +1,72 @@
+
+/*  Estilizações Globais */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgb(236, 236, 236);
+}
+
+/* Estilização Game-Board */
+
 .game-board {
   width: 100%;
   height: 500px;
-  border-bottom: 15px solid #149b2a;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(#87CEEB, #94b0bb);
+  background: linear-gradient(#87CEE8, #E0F6FF);
+  border-bottom: 10px solid #3cff00;
 }
 
-.pipe {
-  position: absolute;
-  bottom: 0;
-  width: 80px;
-  animation: pipe-animation 1.5s infinite linear;
-}
-
+/* Estilizações Mario */
 .mario {
-  width: 150px;
+  width: 75px;
   position: absolute;
   bottom: 0;
+  margin-left: 100px;
+  z-index: 10;
 }
 
 .jump {
-  animation: jump 500ms ease-out;
+  animation: mario-jump 1500ms ease-out;
 }
 
-.clouds {
+@keyframes mario-jump {
+  0% {
+    bottom: 0px;
+  }
+  40% {
+    bottom: 90px;
+  }
+  50% {
+    bottom: 100px;
+  }
+  60% {
+    bottom: 90px;
+  }
+  100% {
+    bottom: 0px;
+  }
+}
+
+/* Estilização Cenário */
+.pipe {
   position: absolute;
-  width: 550px;
-  animation: clouds 20s infinite linear;
+  bottom: 0;
+  width: 70px;
+  right: -80px;
+  z-index: 10;
 }
 
-.restart {
-  display: none;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 100px;
-  height: 30px;
-  border: none;
-  border-radius: 30px;
-  font-size: 18px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  background: #1ae907;
+.pipe-animation {
+  animation: pipe-animation-movement 2s infinite linear;
 }
 
-.warning-msg {
-  position: absolute;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  color: red;
-}
-
-@keyframes pipe-animation {
+@keyframes pipe-animation-movement {
   from {
     right: -80px;
   }
@@ -68,29 +75,46 @@
   }
 }
 
-@keyframes jump {
-  0% {
-    bottom: 0;
-  }
-  40% {
-    bottom: 200px;
-  }
-  50% {
-    bottom: 200px;
-  }
-  60% {
-    bottom: 200px;
-  }
-  100% {
-    bottom: 0;
-  }
+/* Estilização Nuvem */
+.clouds {
+  position: absolute;
+  width: 550px;
+  z-index: 4;
 }
 
-@keyframes clouds {
+.clouds-animation-movement {
+  animation: clouds-animation 20s infinite linear;
+}
+
+@keyframes clouds-animation {
   from {
     right: -550px;
   }
   to {
     right: 100%;
   }
+}
+
+/* Estilização dos Status */
+.textStart {
+  font-family: 'Montserrat', sans-serif;
+  padding: 50px;
+  text-align: center;
+  color: #131313;
+  cursor: default;
+}
+
+.points {
+  font-family: 'Montserrat', sans-serif;
+  padding: 20px;
+  text-align: center;
+  color: rgb(162, 180, 1);
+  cursor: default;
+}
+
+#contador {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  color: #131313;
+  cursor: default;
 }
