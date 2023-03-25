@@ -9,16 +9,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
-  <title>Mario Game</title>
+  <title>Hero Game</title>
 </head>
 <body>
   <div class="game-board">
-    <img src="./images/clouds.png" class="clouds">
-    <img src="./images/marioinicio.png" class="mario">
-    <img src="./images/pipe.png" class="pipe">
+    <img src="./images/cloud.png" class="cloud">
+    <img src="./images/hero.gif" class="hero">
+    <img src="./images/cacto.png" class="cacto">
+    <div class="floor">
+      <img src="./images/floor.png" class="floor1">
+      <img src="./images/floor.png" class="floor2">
+      <img src="./images/floor.png" class="floor3">
+    </div>
+    <span class="gameOverText">GAME OVER! Aperte F5 ou Atualize a Página!</span>
   </div>
-    <p class="textStart">Dê um clique para iniciar</p>
-    <p class="points">Pontuação: <span id="contador">0</span></p>
+  <p class="textStart">Para jogar, pressione ou clique na tela</p>
+  <p class="points">Pontuação: <span id="contador">0</span></p>
 </body>
 <script src="./js/script.js"></script>
 </html>

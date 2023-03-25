@@ -1,70 +1,106 @@
-mario = document.querySelector('.mario');
-pipe = document.querySelector('.pipe');
-clouds = document.querySelector('.clouds');
+hero = document.querySelector('.hero');
+cacto = document.querySelector('.cacto');
 textStart = document.querySelector('.textStart');
-points = document.querySelector('#contador');
+cloud = document.querySelector('.cloud');
+floor1 = document.querySelector('.floor1');
+floor2 = document.querySelector('.floor2');
+floor3 = document.querySelector('.floor3');
+gameOverText = document.querySelector('.gameOverText');
+points = document.querySelector("#contador");
+audioStart = new Audio('./audio/theme.mp3');
+audioGameOver = new Audio('./audio/gameover.mp3');
 
 let contador = 0;
 
-// Função Start do Game
+// Função para Iniciar o Game
 const start = () => {
 
-  textStart.style.color = "rgb(236,236,236)";
+  textStart.style.color = "rgb(189, 189, 189)";
 
-  pipe.classList.add('pipe-animation');
-  mario.style.width = "150px";
-  mario.style.marginLeft = "50px";
-  mario.src = "./images/mario.gif";
-  clouds.classList.add('clouds-animation-movement');
+  hero.style.display = "block";
+
+  cacto.classList.add("cacto-animation");
+
+  cloud.classList.add("cloud-animation");
+
+  function floorAnimation1(){
+    floor1.classList.add('floor-animation-1');
+        }setInterval(floorAnimation1, 0);
+
+function floorAnimation2(){
+    floor2.classList.add('floor-animation-2');
+        }setInterval(floorAnimation2, 0);
+function floorAnimation3(){
+    floor3.classList.add('floor-animation-3');
+        }setInterval(floorAnimation3, 3100);
+
+  audioStart.play();
 
 }
 
-document.addEventListener('click', start);
+document.addEventListener("keydown", start);
+document.addEventListener("click", start);
 
-// Função Pulo
+// Função para Pulo
 const jump = () => {
-  mario.classList.add('jump');
-  mario.src = "./images/jumpmario.png"
-  mario.style.width = "85px";
-
+  hero.classList.add("hero-jump");
   setTimeout(() => {
-    mario.classList.remove('jump');
-    mario.src = "./images/mario.gif";
-    mario.style.width = "150px";
-  }, 1500);
+    hero.classList.remove("hero-jump");
+  }, 500);
 }
 
-document.addEventListener('keydown', jump);
+document.addEventListener("keydown", jump);
+document.addEventListener("click", jump);
 
-// Função para atualizar o score
+// Função pra Atualizar o Score
 const updateScore = () => {
-  contador++
+  contador++;
   points.innerText = contador;
 }
 
-// Função GameOver
-
+// Função para Colisão e Game Over
 const checkGameOver = setInterval(() => {
+  const cactoPosition = cacto.offsetLeft;
+  const heroPosition = +window.getComputedStyle(hero).bottom.replace("px", "");
+  const floorPosition1 = floor1.offsetLeft;
+  const floorPosition2 = floor2.offsetLeft;
+  const floorPosition3 = floor3.offsetLeft;
 
-  const pipePostion = pipe.offsetLeft;
-  const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', "");
+  if (cactoPosition <= 120 && cactoPosition > 0 && heroPosition < 100) {
 
-  if (pipePostion <= 120 && pipePostion > 0 && marioPosition < 80) {
+    cacto.style.animation =  "none";
+    cacto.style.left = `${cactoPosition}px`;
 
-    pipe.style.animation = 'none';
-    pipe.style.left = `${pipePostion}px`;
+    cloud.style.animationPlayState = 'paused';
 
-    mario.style.animation = 'none';
-    mario.style.bottom = `${marioPosition}px`;
+    hero.style.display = "none";
 
-    mario.src = "./images/gameover.png";
-    mario.style.width = "120px";
-    mario.style.marginLeft = "5px";
+    floor1.style.animation = "none";
+    floor1.style.left = `${floorPosition1}px`;
 
-    clouds.style.animationPlayState = 'paused';
+    floor2.style.animation = "none";
+    floor2.style.left = `${floorPosition2}px`;
+
+    floor3.style.animation = "none";
+    floor3.style.left = `${floorPosition3}px`;
+
+    gameOverText.style.display = "flex"
+
+    function stopAudioStart() {
+      audioStart.pause();
+    }stopAudioStart();
+
+    audioGameOver.play();
+
+    function stopAduioGameOver() {
+      audioGameOver.pause();
+    }setTimeout(stopAduioGameOver, 3000);
+
+    clearInterval(checkGameOver);
+
   }
 
-  if (pipePostion <= 60 && pipePostion > 0 && marioPosition >= 80) {
+  if (cactoPosition <= 60 && cactoPosition > 0 && heroPosition >= 100) {
     updateScore();
   }
 
