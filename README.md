@@ -36,4 +36,4 @@ $ git clone <https://github.com/FelipeKreulich/GameHTML>
 
 # Para rodar a Aplicação, abra o arquivo index.html com a extensão do Live Server.
 
-# Para ver a Aplicação Final acesse <https://mariogameweb.vercel.app>
+# Para ver a Aplicação Final acesse <https://herogameweb.vercel.app>
